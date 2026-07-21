@@ -31,7 +31,7 @@
 }
 </script>
 
-<title>Jeremy — Electrical Engineering Portfolio</title>
+<title>Jeremy Daud —  Portfolio</title>
 <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Archivo:wght@600;700;800&family=Inter:wght@400;500&display=swap" as="style">
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Archivo:wght@600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 
@@ -47,9 +47,19 @@
   }
   .btn-cert:hover { background: var(--copper-bright); color: var(--mask); border-color: var(--copper-bright); }
 </style>
-
 </head>
 <body>
+
+<!-- CUSTOM CURSOR -->
+<div id="cursor-dot"></div>
+<div id="cursor-outline"></div>
+
+<!-- SPLASH SCREEN / BOOT SEQUENCE -->
+<div id="splashScreen">
+  <div class="terminal-loader">
+    <span class="text">INITIALIZING SYSTEM_</span><span class="cursor"></span>
+  </div>
+</div>
 
 <!-- INDICATOR TRACE -->
 <div id="scrollTrace"></div>
@@ -71,10 +81,12 @@
 <section class="hero" id="hero">
   <div class="hero-grid">
     <div>
-      <div class="tag">Electrical Engineering Undergraduate</div>
+      <div class="tag">Electrical Engineering</div>
       <h1>Jeremy Daud<br><span>Automation & Control Systems</span></h1>
-      <div class="role silk"> Teknik Elektro</b> · Universitas Sam Ratulangi</div>
-      <p class="tagline">Mahasiswa Teknik Elektro UNSRAT yang berfokus pada sistem kendali, IoT, dan Edge AI. Memiliki rekam jejak riset predictive maintenance, otomasi industri Wilmar Group, serta kepemimpinan inovasi robotika.</p>
+      <div class="role silk"> <b>Teknik Elektro</b> · Universitas Sam Ratulangi</div>
+      
+      <!-- EFEK TYPEWRITER PADA TAGLINE -->
+      <p class="tagline">Mahasiswa Teknik Elektro UNSRAT yang berfokus pada <span id="typewriter" class="highlight" style="color: var(--gold);"></span><span class="type-cursor">|</span><br>Memiliki rekam jejak riset predictive maintenance, otomasi industri Wilmar Group, serta kepemimpinan inovasi robotika.</p>
       
       <!-- TOMBOL DOWNLOAD CV -->
       <a href="CV_Jeremy.pdf" target="_blank" class="btn-dl">
@@ -82,14 +94,14 @@
         CV
       </a>
 
-      <div class="stat-strip">
+      <div class="stat-strip reveal">
         <div class="stat"><div class="n">15</div><div class="l">Sekolah</div></div>
         <div class="stat"><div class="n">05</div><div class="l">Praktikum Diampu</div></div>
         <div class="stat"><div class="n">01</div><div class="l">SURO CUP Diinisiasi</div></div>
         <div class="stat"><div class="n">01</div><div class="l">Juara 1 FMRG</div></div>
       </div>
     </div>
-    <div class="chip-photo">
+    <div class="chip-photo reveal">
       <div class="chip-pin top p1"></div><div class="chip-pin top p2"></div><div class="chip-pin top p3"></div>
       <div class="chip-pin bottom p1"></div><div class="chip-pin bottom p2"></div><div class="chip-pin bottom p3"></div>
       <img src="./Jere.png" alt="Foto Profil">
@@ -97,65 +109,106 @@
   </div>
 </section>
 
-<!-- SECTION JOURNEY (TIMELINE) -->
+<!-- SECTION JOURNEY (TIMELINE) DENGAN FITUR MODAL -->
 <section id="journey">
   <div class="designator"><span class="pad"></span>U1 — ACADEMIC & PROFESSIONAL JOURNEY</div>
   <div class="timeline">
-    <div class="tl-item">
+    
+    <div class="tl-item reveal" onclick="openModal(this)"
+         data-cat="Akademik · 2022"
+         data-title="Awal Studi Teknik Elektro UNSRAT"
+         data-problem="Fase awal pendidikan untuk membangun fondasi rekayasa kelistrikan dan logika algoritma."
+         data-solution="Memulai studi di Fakultas Teknik, Universitas Sam Ratulangi, dengan fokus khusus pada pengembangan ilmu sistem kendali dan kecerdasan buatan."
+         data-impact="Memperoleh pemahaman komprehensif tentang teori rangkaian, pemrograman dasar, dan mulai beradaptasi dengan riset laboratorium kampus."
+         data-images="Kampus.jpg">
       <div class="tl-date">2022</div>
       <div class="tl-title">Mahasiswa Teknik Elektro UNSRAT</div>
-      <div class="tl-desc">Memulai studi di Fakultas Teknik, Universitas Sam Ratulangi, dengan fokus pada sistem kendali dan kecerdasan buatan.</div>
+      <div class="tl-desc">Memulai studi di Fakultas Teknik, Universitas Sam Ratulangi, dengan fokus pada sistem kendali dan kecerdasan buatan. (Klik untuk detail)</div>
     </div>
-    <div class="tl-item">
+
+    <div class="tl-item reveal" onclick="openModal(this)"
+         data-cat="Organisasi · 2023 - 2024"
+         data-title="Wakil Ketua UKM Edukasi Robotika"
+         data-problem="Kebutuhan untuk menstrukturisasi program pembinaan dan kaderisasi mahasiswa baru dalam bidang rekayasa robotika."
+         data-solution="Mendampingi kepemimpinan organisasi, merancang kurikulum praktikum dasar, dan merintis arah riset robotika bagi anggota baru."
+         data-impact="Berhasil menumbuhkan minat riset anggota serta mengukuhkan soliditas struktur kepengurusan internal UKM."
+         data-images="Euro1.jpg,Euro2.jpg">
       <div class="tl-date">Des 2023 — Des 2024</div>
       <div class="tl-title">Wakil Ketua UKM Edukasi Robotika FT-UNSRAT</div>
-      <div class="tl-desc">Mendampingi kepemimpinan organisasi, memulai program mentor praktikum, dan merintis riset dasar robotika.</div>
+      <div class="tl-desc">Mendampingi kepemimpinan organisasi, memulai program mentor praktikum, dan merintis riset dasar robotika. (Klik untuk detail)</div>
     </div>
-    <div class="tl-item">
+
+    <div class="tl-item reveal" onclick="openModal(this)"
+         data-cat="Pertukaran Pelajar · 2024"
+         data-title="Program MBKM Nasional"
+         data-problem="Pentingnya memperluas wawasan akademik, membangun jejaring nasional, dan mempelajari perspektif keilmuan teknik elektro di luar kampus asal."
+         data-solution="Lolos seleksi program Pertukaran Mahasiswa (MBKM) ke Departemen Teknik Elektro Universitas Brawijaya, Malang."
+         data-impact="Berhasil beradaptasi dengan budaya akademik yang dinamis, memperkuat relasi lintas universitas, dan membawa insight teknologi baru ke organisasi asal."
+         data-images="MBKM.jpg,MBKM1.png,MBKM2.jpg">
       <div class="tl-date">Sep 2024 — Des 2024</div>
       <div class="tl-title">Program MBKM — Universitas Brawijaya</div>
-      <div class="tl-desc">Mengikuti pertukaran mahasiswa ke Departemen Teknik Elektro Universitas Brawijaya, memperluas wawasan dan jaringan akademik nasional.</div>
+      <div class="tl-desc">Mengikuti pertukaran mahasiswa ke Departemen Teknik Elektro Universitas Brawijaya, memperluas wawasan dan jaringan akademik nasional. (Klik untuk detail)</div>
     </div>
-    <div class="tl-item">
+
+    <div class="tl-item reveal" onclick="openModal(this)"
+         data-cat="Kepemimpinan · 2024 - 2025"
+         data-title="Ketua UKM Edukasi Robotika"
+         data-problem="Visi organisasi yang stagnan pada tingkat universitas, membutuhkan eksposur dan jangkauan sosial yang lebih luas ke tingkat pelajar."
+         data-solution="Memimpin ekspansi organisasi menuju skala provinsi. Menginisiasi kompetisi SURO CUP dan menjalin kolaborasi strategis dengan Pemprov."
+         data-impact="Melibatkan partisipasi aktif dari 15 sekolah di Sulawesi Utara dan menjadikan UKM sebagai pusat inovasi robotika tingkat provinsi."
+         data-images="SuroCup.jpg,SuroCup1.jpg">
       <div class="tl-date">Des 2024 — Des 2025</div>
       <div class="tl-title">Ketua UKM Edukasi Robotika FT-UNSRAT</div>
-      <div class="tl-desc">Memimpin organisasi menuju skala provinsi. Menginisiasi SURO CUP, melaksanakan sosialisasi ke 15 sekolah di Sulawesi Utara, dan memperluas kolaborasi dengan pemerintah provinsi.</div>
+      <div class="tl-desc">Memimpin organisasi menuju skala provinsi. Menginisiasi SURO CUP, melaksanakan sosialisasi ke 15 sekolah, dan memperluas kolaborasi. (Klik untuk detail)</div>
     </div>
-    <div class="tl-item">
+
+    <div class="tl-item reveal" onclick="openModal(this)"
+         data-cat="Industri · 2025"
+         data-title="Magang PT Multi Nabati Sulawesi"
+         data-problem="Pentingnya pengujian teori sistem kendali (PLC/DCS) dalam skala industri nyata yang bersifat kritis."
+         data-solution="Merancang sistem peringatan darurat nirkabel berbasis LoRa untuk kendali sirene multipoint serta terlibat aktif dalam operasional electrical wiring."
+         data-impact="Mendapatkan apresiasi tertinggi dari Head of Dept Wilmar Group atas blueprint sistem darurat yang inovatif dan antisipatif."
+         data-images="MNS.png,MNS1.jpg">
       <div class="tl-date">4 Ags — 4 Okt 2025</div>
       <div class="tl-title">Magang Industri — PT Multi Nabati Sulawesi</div>
-      <div class="tl-desc">Terlibat dalam pemrograman PLC dan DCS, electrical wiring, dan merancang sistem peringatan darurat nirkabel LoRa di bawah naungan Wilmar Group.</div>
+      <div class="tl-desc">Terlibat dalam pemrograman PLC dan DCS, electrical wiring, dan merancang sistem peringatan darurat nirkabel LoRa di bawah Wilmar Group. (Klik untuk detail)</div>
     </div>
-    <div class="tl-item">
+
+    <div class="tl-item reveal" onclick="openModal(this)"
+         data-cat="Software AI · 2025"
+         data-title="Inisiasi Proyek Jarvis"
+         data-problem="Tingginya beban tugas administratif, pencarian direktori, dan kompilasi data harian yang memakan waktu produktif."
+         data-solution="Memulai pengembangan bot asisten AI independen menggunakan Python terintegrasi untuk otomasi input/output sistem harian."
+         data-impact="Mempercepat pemanggilan file log dan tugas berulang secara masif, meningkatkan efisiensi komputasi personal hingga 70%."
+         data-images="Jarvis.jpg,Jarvis1.jpg">
       <div class="tl-date">4 Des 2025</div>
       <div class="tl-title">Inisiasi Proyek "Jarvis"</div>
-      <div class="tl-desc">Memulai pengembangan asisten AI independen berbasis Python terintegrasi untuk otomasi tugas harian.</div>
+      <div class="tl-desc">Memulai pengembangan asisten AI independen berbasis Python terintegrasi untuk otomasi tugas harian. (Klik untuk detail)</div>
     </div>
-    <div class="tl-item">
+
+    <div class="tl-item reveal" onclick="openModal(this)"
+         data-id="ta-project"
+         data-cat="Tugas Akhir · 2026"
+         data-title="Riset Predictive Maintenance & Kelulusan"
+         data-problem="Pompa sentrifugal industri sering mengalami kegagalan mendadak yang merugikan proses operasional dan perbaikan."
+         data-solution="Menyusun arsitektur sistem estimasi Remaining Useful Life menggunakan fusi sensor dan pemodelan LSTM Supervised Classifier pada mikrokontroler ESP32."
+         data-impact="Menghasilkan performa model Edge AI dengan akurasi 99.99% dan menyediakan RUL lead-time deteksi hingga 64 menit sebelum kerusakan parah."
+         data-images="TA.png,TA1.png,TA2.png"
+         data-link="https://github.com/jeyoz22">
       <div class="tl-date">2026</div>
       <div class="tl-title">Riset Predictive Maintenance & Kelulusan</div>
-      <div class="tl-desc">Mengerjakan tugas akhir berupa arsitektur estimasi Remaining Useful Life pada pompa sentrifugal berbasis LSTM Supervised Binary Classifier dan ESP32, bersiap menuju karier rekayasa profesional.</div>
+      <div class="tl-desc">Mengerjakan tugas akhir berupa arsitektur estimasi RUL pada pompa sentrifugal berbasis LSTM dan ESP32, bersiap menuju karier profesional. (Klik untuk detail)</div>
     </div>
+
   </div>
 </section>
 
 <section id="impact">
   <div class="designator"><span class="pad"></span>U2 — IMPACT &amp; OUTREACH</div>
-  <div class="impact-panel">
-    <div>
-      <h3>SURO CUP 2025</h3>
-      <p>Kontes Robot SMA/SMK se-Sulawesi Utara yang diinisiasi sebagai program kerja UKM Edukasi Robotika FT-UNSRAT — membuka akses kompetisi robotika bagi pelajar di seluruh provinsi.</p>
-      <div class="badges"><span>Skala Provinsi</span><span>Inisiator Program</span><span>Kolaborasi Pemprov</span></div>
-    </div>
-    <div>
-      <h3>Kolaborasi Eksternal & Kompetisi</h3>
-      <p>Membawa inovasi keluar kampus melalui audiensi strategis dengan Bank Indonesia untuk event CBP Rupiah, serta mementori tim hingga meraih Juara 1 FMRG kategori Robotic, Coding & IoT.</p>
-    </div>
-  </div>
   
   <div class="news-grid">
     <!-- NEWS CARDS -->
-    <div class="news-card" onclick="openModal(this)"
+    <div class="news-card reveal" onclick="openModal(this)"
          data-cat="TVRI Sulut · Nyiur Melambai"
          data-title="Inovasi Teknologi pada Kalangan Pelajar"
          data-problem="Kurangnya perhatian masyarakat terhadap laju perkembangan teknologi, memunculkan risiko ketertinggalan dari segi publikasi serta adopsi teknis di tingkat pelajar."
@@ -172,7 +225,7 @@
     </div>
 
     <!-- PENGGABUNGAN PELUNCURAN JASON BERSAMA GUBERNUR -->
-    <div class="news-card" onclick="openModal(this)"
+    <div class="news-card reveal" onclick="openModal(this)"
          data-cat="Sulut Riset Inovasi & Expo 2025"
          data-title="Peluncuran Robot Jason Bersama Gubernur"
          data-problem="Kebutuhan untuk menjembatani inovasi teknologi dari laboratorium kampus dengan aplikasi dunia nyata yang bisa langsung berinteraksi dengan audiens umum dan pimpinan daerah."
@@ -187,7 +240,7 @@
       </div>
     </div>
 
-    <div class="news-card" onclick="openModal(this)"
+    <div class="news-card reveal" onclick="openModal(this)"
          data-cat="Kerja Sama Strategis"
          data-title="Kolaborasi Bersama Prof Grevo"
          data-problem="Pelaksanaan event skala provinsi seperti SURO CUP membutuhkan legitimasi dan dukungan instansi vertikal agar sekolah-sekolah diizinkan untuk berpartisipasi penuh."
@@ -202,9 +255,9 @@
       </div>
     </div>
 
-    <div class="news-card" onclick="openModal(this)"
+    <div class="news-card reveal" onclick="openModal(this)"
          data-cat="Festival Media Remaja GMIM"
-         data-title="Juara 1 Kategori Robotic & IoT"
+         data-title="Juara 1 Kategori Coding, Robotic & IoT"
          data-problem="Keterbatasan fasilitas dan metode interaksi yang inklusif bagi jemaat tunarungu saat mengikuti rangkaian ibadah dan menyampaikan perasaan/kebutuhan mereka."
          data-solution="Merancang alat komunikasi inklusif berbasis Arduino Uno yang dilengkapi 5 push-button. Setiap tombol telah diprogram untuk mengonversi masukan fisik menjadi keluaran kalimat spesifik sesuai perasaan/pesan jemaat."
          data-impact="Berhasil memenangkan Juara 1 tingkat provinsi, serta membuktikan bahwa teknologi IoT murah dapat secara signifikan meningkatkan inklusivitas ruang publik bagi penyandang disabilitas."
@@ -212,12 +265,12 @@
       <div class="news-thumb"><img src="FMRG.png" alt="Juara 1 FMRG" loading="lazy"></div>
       <div class="news-body">
         <div class="src">Festival Media Remaja GMIM</div>
-        <h4>Juara 1 Kategori Robotic &amp; IoT</h4>
+        <h4>Juara 1 Kategori Coding, Robotic &amp; IoT</h4>
         <p>Mementori tim memenangkan kompetisi melalui inovasi alat komunikasi inklusif bagi jemaat tunarungu.</p>
       </div>
     </div>
 
-    <div class="news-card" onclick="openModal(this)"
+    <div class="news-card reveal" onclick="openModal(this)"
          data-cat="Bank Indonesia Provinsi Sulut"
          data-title="Audiensi & Kolaborasi CBP Rupiah"
          data-problem="Banyaknya masyarakat yang masih tidak paham mengenai tingkat urgensi dan cara mengidentifikasi keaslian nilai uang rupiah (Kampanye Cinta Bangga Paham Rupiah)."
@@ -232,8 +285,7 @@
       </div>
     </div>
 
-    <!-- MBKM UB MENGGANTIKAN JASON -->
-    <div class="news-card" onclick="openModal(this)"
+    <div class="news-card reveal" onclick="openModal(this)"
          data-cat="Program MBKM Nasional"
          data-title="Perkuliahan di Universitas Brawijaya"
          data-problem="Pentingnya memperluas wawasan akademik, membangun jejaring nasional, dan mempelajari perspektif keilmuan teknik elektro di luar kampus asal."
@@ -253,19 +305,68 @@
 <section id="academic">
   <div class="designator"><span class="pad"></span>U3 — ACADEMIC &amp; INSTRUCTIONAL LEADERSHIP</div>
   <div class="comp-list">
-    <div class="comp-row"><div class="ref">R1</div><div><h4>Praktikum Robotika</h4><div class="role">Mentor Utama</div></div><p>Membimbing perancangan dan pemrograman robot dasar.</p></div>
-    <div class="comp-row"><div class="ref">R2</div><div><h4>Praktikum Sistem Kendali</h4><div class="role">Mentor Utama</div></div><p>Mengajarkan konsep dasar hingga lanjut sistem kendali.</p></div>
-    <div class="comp-row"><div class="ref">R3</div><div><h4>Analisis &amp; Desain Sistem Kendali</h4><div class="role">Mentor Utama</div></div><p>Membimbing analisis kestabilan dan desain kontroler.</p></div>
-    <div class="comp-row"><div class="ref">R4</div><div><h4>Komponen Teknik Kendali</h4><div class="role">Mentor Utama</div></div><p>Pendalaman komponen elektronik dan instrumentasi.</p></div>
-    <div class="comp-row"><div class="ref">R5</div><div><h4>Sistem Otomasi Industri</h4><div class="role">Mentor Utama</div></div><p>Mengaitkan teori otomasi dengan penerapan industri nyata.</p></div>
-    <div class="comp-row"><div class="ref">R6</div><div><h4>Pelatih Mentor &amp; Teknis 3D Printing</h4><div class="role">Trainer</div></div><p>Mengajar rekan mentor serta melatih desain dan slicing 3D.</p></div>
+    
+    <div class="comp-row reveal" onclick="openModal(this)" style="cursor: pointer;"
+         data-cat="Praktikum · Mentorship"
+         data-title="Praktikum Robotika"
+         data-modul="• Pengenalan Robot Mobile dan Bluetooth<br>• Pengenalan Robot Line Follower<br>• Pengenalan Robot Penghindar Rintangan<br>• Pengenalan Robot Pengikut Objek Berwarna<br>• Pengenalan PID pada Robot Line Follower">
+      <div class="ref">R1</div>
+      <div><h4>Praktikum Robotika</h4><div class="role">Mentor Utama</div></div>
+      <p>Membimbing perancangan dan pemrograman robot dasar.</p>
+    </div>
+
+    <div class="comp-row reveal" onclick="openModal(this)" style="cursor: pointer;"
+         data-cat="Praktikum · Mentorship"
+         data-title="Praktikum Sistem Kendali"
+         data-modul="• Introduction<br>• Open Loop Control<br>• Close Loop Control<br>• Analysis of Controlled Systems<br>• Controlled Systems with Compensation<br>• Controlled Systems with Time Delay of a Higher Order<br>• Controlled Systems without Compensation<br>• Controller Types<br>• Proportional-action Control<br>• Integral-action Control<br>• PI Control<br>• PID Control">
+      <div class="ref">R2</div>
+      <div><h4>Praktikum Sistem Kendali</h4><div class="role">Mentor Utama</div></div>
+      <p>Mengajarkan konsep dasar hingga lanjut sistem kendali.</p>
+    </div>
+
+    <div class="comp-row reveal" onclick="openModal(this)" style="cursor: pointer;"
+         data-cat="Praktikum · Mentorship"
+         data-title="Praktikum Analisis & Desain Sistem Kendali"
+         data-modul="• Karakteristik Sensor Cahaya<br>• Karakteristik Sensor Suhu<br>• Karakteristik Mikrokontroler<br>• Karakteristik Arduino Mega<br>• Karakteristik AC sebagai Aktuator<br>• Karakteristik Motor DC PG-45<br>• Sistem Cerdas Pencahayaan pada Smart Classroom<br>• Smart Class Room berbasis Home Assistant pada Raspberry Pi Model 4.0<br>• Sistem Kendali PID pada Ball Levitation">
+      <div class="ref">R3</div>
+      <div><h4>Praktikum Analisis &amp; Desain Sistem Kendali</h4><div class="role">Mentor Utama</div></div>
+      <p>Membimbing analisis kestabilan dan desain kontroler.</p>
+    </div>
+
+    <div class="comp-row reveal" onclick="openModal(this)" style="cursor: pointer;"
+         data-cat="Praktikum · Mentorship"
+         data-title="Praktikum Komponen Teknik Kendali"
+         data-modul="• Projek Meja Simulasi dan Pengukuran Gempa">
+      <div class="ref">R4</div>
+      <div><h4>Praktikum Komponen Teknik Kendali</h4><div class="role">Mentor Utama</div></div>
+      <p>Pendalaman komponen elektronik dan instrumentasi.</p>
+    </div>
+
+    <div class="comp-row reveal" onclick="openModal(this)" style="cursor: pointer;"
+         data-cat="Praktikum · Mentorship"
+         data-title="Praktikum Sistem Otomasi Industri"
+         data-modul="• Basic Input-Output PLC<br>• Dasar Logika Boolean<br>• Dasar Timer pada PLC<br>• Dasar Counter pada PLC">
+      <div class="ref">R5</div>
+      <div><h4>Praktikum Sistem Otomasi Industri</h4><div class="role">Mentor Utama</div></div>
+      <p>Mengaitkan teori otomasi dengan penerapan industri nyata.</p>
+    </div>
+
+    <div class="comp-row reveal" onclick="openModal(this)" style="cursor: pointer;"
+         data-cat="Training · UKM EURO"
+         data-title="Pelatih Mentor & Teknis 3D Printing"
+         data-modul="• Fundamental 3D Design & Additive Manufacturing<br>• Sketchup Advanced Modeling<br>• 3D Model Preparation (Autodesk Netfabb)<br>• 3D Slicing (Ultimaker Cura)<br>• 3D Printing Operation<br>• Post Processing & Quality Inspection">
+      <div class="ref">R6</div>
+      <div><h4>Trainer 3D Modeling &amp; Printing</h4><div class="role">Trainer</div></div>
+      <p>Mengajar serta melatih desain dan slicing 3D.</p>
+    </div>
+
   </div>
 </section>
 
 <section id="credentials">
   <div class="designator"><span class="pad"></span>C1 — CREDENTIALS & CERTIFICATIONS</div>
   <div class="comp-list">
-    <div class="comp-row">
+    <div class="comp-row reveal">
       <div class="ref">C01</div>
       <div>
         <h4>Ketua Organisasi</h4>
@@ -273,11 +374,11 @@
       </div>
       <div>
         <p>Memimpin arah kebijakan dan program kerja UKM tingkat Universitas.</p>
-        <a href="Sertifikat_Ketua_EURO.pdf" target="_blank" class="btn-cert">📄 Lihat Sertifikat</a>
+        <a href="Sertifikat_Ketua_EURO.pdf" target="_blank" class="btn-cert">📄 Sertifikat</a>
       </div>
     </div>
     
-    <div class="comp-row">
+    <div class="comp-row reveal">
       <div class="ref">C02</div>
       <div>
         <h4>Wakil Ketua Organisasi</h4>
@@ -285,11 +386,11 @@
       </div>
       <div>
         <p>Mendampingi kepemimpinan dan eksekusi manajerial internal.</p>
-        <a href="Sertifikat_Wakil_Ketua_EURO.pdf" target="_blank" class="btn-cert">📄 Lihat Sertifikat</a>
+        <a href="Sertifikat_Wakil_Ketua_EURO.pdf" target="_blank" class="btn-cert">📄 Sertifikat</a>
       </div>
     </div>
     
-    <div class="comp-row">
+    <div class="comp-row reveal">
       <div class="ref">C03</div>
       <div>
         <h4>Program MBKM</h4>
@@ -297,11 +398,11 @@
       </div>
       <div>
         <p>Lolos seleksi program pertukaran mahasiswa di Teknik Elektro UB.</p>
-        <a href="Sertifikat_MBKM.pdf" target="_blank" class="btn-cert">📄 Lihat Sertifikat</a>
+        <a href="Sertifikat_MBKM.pdf" target="_blank" class="btn-cert">📄 Sertifikat</a>
       </div>
     </div>
     
-    <div class="comp-row">
+    <div class="comp-row reveal">
       <div class="ref">C04</div>
       <div>
         <h4>Kepanitiaan & Event Organizer</h4>
@@ -309,11 +410,11 @@
       </div>
       <div>
         <p>Terlibat langsung dalam operasional teknis kontes robot pertama berskala provinsi.</p>
-        <a href="Sertifikat_Panitia_SUROCUP.pdf" target="_blank" class="btn-cert">📄 Lihat Sertifikat</a>
+        <a href="Sertifikat_Panitia_SUROCUP.pdf" target="_blank" class="btn-cert">📄 Sertifikat</a>
       </div>
     </div>
     
-    <div class="comp-row">
+    <div class="comp-row reveal">
       <div class="ref">C05</div>
       <div>
         <h4>Delegasi Kompetisi Regional</h4>
@@ -321,7 +422,7 @@
       </div>
       <div>
         <p>Peserta Kontes Robot Divisi Search and Rescue mewakili perguruan tinggi.</p>
-        <a href="Sertifikat_KRI_2024.pdf" target="_blank" class="btn-cert">📄 Lihat Sertifikat</a>
+        <a href="Sertifikat_KRI_2024.pdf" target="_blank" class="btn-cert">📄 Sertifikat</a>
       </div>
     </div>
   </div>
@@ -329,7 +430,7 @@
 
 <section id="industry">
   <div class="designator"><span class="pad"></span>U4 — INDUSTRIAL EXPERIENCE</div>
-  <div class="industry-block">
+  <div class="industry-block reveal">
     <div>
       <img src="MNS.png" alt="PT Multi Nabati Sulawesi" class="industry-img" loading="lazy">
       <h3>PT Multi Nabati Sulawesi (Wilmar Group)</h3>
@@ -368,21 +469,22 @@
 
   <div class="proj-grid">
     <!-- PROJECT CARDS -->
-    <div class="proj-card filter-ai filter-iot" onclick="openModal(this)"
+    <div class="proj-card reveal filter-ai filter-iot" onclick="openModal(this)"
          data-id="ta-project"
          data-cat="TA — Tugas Akhir"
          data-title="Predictive Maintenance Pompa Sentrifugal"
          data-problem="Pompa sentrifugal merupakan aset kritis industri yang membutuhkan sistem pemeliharaan andal guna mencegah kegagalan mendadak yang merugikan operasional."
          data-solution="Mengembangkan sistem pemeliharaan prediktif berbasis edge-hybrid computing menggunakan arsitektur LSTM Supervised Binary Classifier. Sistem ini di-deploy pada ESP32, memadukan fusi sensor mekanis (ADXL345) dan arus listrik True RMS (ACS712). RUL diekstrapolasi via regresi Polyfit secara real-time."
          data-impact="Model Edge AI mencatat performa superior: Akurasi 99,99%, Presisi 99,88%, Sensitivitas 99,96%, dan F1-Score 99,92%. Estimasi RUL berhasil memberikan lead-time deteksi 36 hingga 64 menit sebelum kerusakan fatal terjadi."
-         data-images="TA.png,TA1.png,TA2.png">
+         data-images="TA.png,TA1.png,TA2.png"
+         data-link="https://github.com/jeyoz22">
       <div class="idx">TA — Tugas Akhir</div>
       <h4>Predictive Maintenance Pompa Sentrifugal</h4>
       <p>Arsitektur predictive maintenance waktu-nyata untuk estimasi Remaining Useful Life, model LSTM Supervised Binary Classifier di-deploy pada ESP32.</p>
       <div class="tags"><span>ESP32</span><span>LSTM Classifier</span><span>Edge AI</span></div>
     </div>
 
-    <div class="proj-card filter-robotics filter-ai" onclick="openModal(this)"
+    <div class="proj-card reveal filter-robotics filter-ai" onclick="openModal(this)"
          data-cat="Robotika & Expo"
          data-title="Robot Penyambut Tamu Jason"
          data-problem="Menguji dan mendemonstrasikan keandalan implementasi algoritma Computer Vision pada hardware embedded di ruang publik yang dinamis."
@@ -395,7 +497,7 @@
       <div class="tags"><span>Robotics</span><span>Interactive AI</span><span>Expo 2025</span></div>
     </div>
 
-    <div class="proj-card filter-iot" onclick="openModal(this)"
+    <div class="proj-card reveal filter-iot" onclick="openModal(this)"
          data-cat="IoT & Inovasi Sosial"
          data-title="Alat Komunikasi Inklusif (Tunarungu)"
          data-problem="Hambatan interaksi komunikasi bagi penyandang tunarungu dalam mengekspresikan kondisi spesifik di lingkungan gereja."
@@ -408,7 +510,7 @@
       <div class="tags"><span>IoT</span><span>Mentorship</span><span>1st Place</span></div>
     </div>
 
-    <div class="proj-card filter-robotics" onclick="openModal(this)"
+    <div class="proj-card reveal filter-robotics" onclick="openModal(this)"
          data-cat="Robotika"
          data-title="SAR Hexapod 3D"
          data-problem="Kebutuhan eksplorasi medan tidak rata (Search and Rescue) yang tidak bisa dijangkau oleh robot beroda konvensional."
@@ -421,7 +523,7 @@
       <div class="tags"><span>Inverse Kinematics</span><span>3D Design</span></div>
     </div>
 
-    <div class="proj-card filter-robotics" onclick="openModal(this)"
+    <div class="proj-card reveal filter-robotics" onclick="openModal(this)"
          data-cat="Robotika"
          data-title="Lengan Pneumatik & Line Follower"
          data-problem="Kebutuhan demonstrasi pemahaman mendalam tentang teori kontrol proporsional, integral, dan derivatif (PID) serta mekanika fluida (pneumatik)."
@@ -434,13 +536,14 @@
       <div class="tags"><span>Pneumatik</span><span>PID</span></div>
     </div>
 
-    <div class="proj-card filter-ai" onclick="openModal(this)"
+    <div class="proj-card reveal filter-ai" onclick="openModal(this)"
          data-cat="AI Software"
-         data-title="Jarvis — Asisten AI Independen"
+         data-title="Asisten AI Independen &quot;Jarvis&quot;"
          data-problem="Banyaknya tugas administratif, pencarian data, dan kompilasi harian yang memakan waktu produktif."
          data-solution="Mengembangkan bot skrip AI lokal menggunakan Python dan pustaka pengenalan suara, menghubungkannya dengan database custom untuk mengotomatisasi input/output sistem harian."
          data-impact="Meningkatkan efisiensi komputasi personal dan mempercepat pemanggilan direktori serta tugas berulang hingga 70%."
-         data-images="Jarvis.jpg,Jarvis1.jpg">
+         data-images="Jarvis.jpg,Jarvis1.jpg"
+         data-link="https://github.com/jeyoz22">
       <div class="idx">AI Software</div>
       <h4>Jarvis — Asisten AI Independen</h4>
       <p>Pengembangan asisten AI independen untuk otomasi tugas dan interaksi.</p>
@@ -452,63 +555,82 @@
 <section id="stack">
   <div class="designator"><span class="pad"></span>U6 — TECH STACK &amp; SKILLS</div>
   
-  <!-- SKILL BARS SECTION -->
+  <!-- SOFT SKILLS & LEADERSHIP BLOCK -->
+  <h3 class="sub-heading reveal">Soft Skills & Leadership</h3>
+  <div class="badges soft-skills reveal">
+      <span>Project Management</span>
+      <span>Public Speaking</span>
+      <span>Cross-functional Leadership</span>
+      <span>Strategic Partnerships</span>
+  </div>
+
+  <h3 class="sub-heading reveal" style="margin-top: 40px;">Engineering Hard Skills</h3>
+  
+  <!-- SKILL BARS SECTION DENGAN ANIMASI PROGRESS -->
   <div class="skill-container">
-    <div class="skill-row">
+    <div class="skill-row reveal">
       <div class="skill-header"><span>Embedded Systems / IoT (ESP32, LoRa, Arduino)</span><span class="pct">95%</span></div>
-      <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 95%;"></div></div>
+      <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 0%;" data-width="95%"></div></div>
     </div>
-    <div class="skill-row">
+    <div class="skill-row reveal">
       <div class="skill-header"><span>Control Systems (PID, LQR)</span><span class="pct">90%</span></div>
-      <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 90%;"></div></div>
+      <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 0%;" data-width="90%"></div></div>
     </div>
-    <div class="skill-row">
+    <div class="skill-row reveal">
       <div class="skill-header"><span>Programming (Python, C++)</span><span class="pct">90%</span></div>
-      <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 90%;"></div></div>
+      <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 0%;" data-width="90%"></div></div>
     </div>
-    <div class="skill-row">
+    <div class="skill-row reveal">
       <div class="skill-header"><span>AI & Machine Learning (LSTM, CV, TinyML)</span><span class="pct">88%</span></div>
-      <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 88%;"></div></div>
+      <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 0%;" data-width="88%"></div></div>
     </div>
-    <div class="skill-row">
+    <div class="skill-row reveal">
       <div class="skill-header"><span>3D Design & Fabrication (SketchUp, Cura)</span><span class="pct">85%</span></div>
-      <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+      <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 0%;" data-width="85%"></div></div>
     </div>
   </div>
 
   <div class="stack-grid">
-    <div class="stack-chip"><div class="ic">C++</div><div class="lb">Bahasa</div></div>
-    <div class="stack-chip"><div class="ic">PY</div><div class="lb">Python</div></div>
-    <div class="stack-chip"><div class="ic">CV</div><div class="lb">OpenCV</div></div>
-    <div class="stack-chip"><div class="ic">ESP32</div><div class="lb">IoT MCU</div></div>
-    <div class="stack-chip"><div class="ic">STM32</div><div class="lb">MCU</div></div>
-    <div class="stack-chip"><div class="ic">ARD</div><div class="lb">Arduino</div></div>
-    <div class="stack-chip"><div class="ic">LoRa</div><div class="lb">RF Comm.</div></div>
-    <div class="stack-chip"><div class="ic">PID</div><div class="lb">Kendali</div></div>
-    <div class="stack-chip"><div class="ic">LQR</div><div class="lb">Kendali</div></div>
-    <div class="stack-chip"><div class="ic">TinyML</div><div class="lb">Edge AI</div></div>
-    <div class="stack-chip"><div class="ic">SU</div><div class="lb">SketchUp</div></div>
-    <div class="stack-chip"><div class="ic">Cura</div><div class="lb">Slicing 3D</div></div>
+    <div class="stack-chip reveal"><div class="ic">C++</div><div class="lb">Bahasa</div></div>
+    <div class="stack-chip reveal"><div class="ic">PY</div><div class="lb">Python</div></div>
+    <div class="stack-chip reveal"><div class="ic">CV</div><div class="lb">OpenCV</div></div>
+    <div class="stack-chip reveal"><div class="ic">ESP32</div><div class="lb">IoT MCU</div></div>
+    <div class="stack-chip reveal"><div class="ic">STM32</div><div class="lb">MCU</div></div>
+    <div class="stack-chip reveal"><div class="ic">ARD</div><div class="lb">Arduino</div></div>
+    <div class="stack-chip reveal"><div class="ic">LoRa</div><div class="lb">RF Comm.</div></div>
+    <div class="stack-chip reveal"><div class="ic">PID</div><div class="lb">Kendali</div></div>
+    <div class="stack-chip reveal"><div class="ic">LQR</div><div class="lb">Kendali</div></div>
+    <div class="stack-chip reveal"><div class="ic">TinyML</div><div class="lb">Edge AI</div></div>
+    <div class="stack-chip reveal"><div class="ic">SU</div><div class="lb">SketchUp</div></div>
+    <div class="stack-chip reveal"><div class="ic">Cura</div><div class="lb">Slicing 3D</div></div>
   </div>
 </section>
 
 <section id="contact">
   <div class="designator"><span class="pad"></span>J1 — COMMUNICATIONS PORT (TX/RX)</div>
+  
+  <!-- CALL TO ACTION (CTA) BARU -->
+  <p class="cta-text reveal">Currently open for Engineering roles, IoT consultation, or full-time opportunities. Let's build something impactful.</p>
+
   <div class="contact-block">
-    <a href="mailto:jey.daud22@gmail.com" class="contact-pin">
+    <!-- FUNGSI COPY-TO-CLIPBOARD -->
+    <a href="javascript:void(0)" onclick="copyEmail(event)" class="contact-pin reveal">
       <div class="ic">MAIL</div>
       <div class="lb">jey.daud22@gmail.com</div>
     </a>
-    <a href="https://www.linkedin.com/in/jeremy-daud-679813251" target="_blank" class="contact-pin">
+    <a href="https://www.linkedin.com/in/jeremy-daud-679813251" target="_blank" class="contact-pin reveal">
       <div class="ic">LINKEDIN</div>
       <div class="lb">Connect</div>
     </a>
-    <a href="https://github.com/jeyoz22" target="_blank" class="contact-pin">
+    <a href="https://github.com/jeyoz22" target="_blank" class="contact-pin reveal">
       <div class="ic">GITHUB</div>
       <div class="lb">jeyoz22</div>
     </a>
   </div>
 </section>
+
+<!-- TOAST NOTIFICATION COPY EMAIL -->
+<div id="toast">Alamat email disalin ke clipboard!</div>
 
 <footer>REV.C · CONTINUITY OK — © Jeremy · Teknik Elektro, UNSRAT</footer>
 
@@ -523,7 +645,7 @@
       <h2 class="modal-title" id="modalTitle">Project Title</h2>
     </div>
     
-    <div class="modal-body">
+    <div class="modal-body" id="modalBodyElement">
       <!-- Image & Video Slideshow -->
       <div class="slideshow-container" id="slideshowContainer" aria-live="polite">
         <!-- Slides diinjeksi via JavaScript -->
@@ -533,59 +655,84 @@
       
       <!-- Text Details -->
       <div class="modal-details">
-        <h4><span class="highlight">_</span> Latar Belakang Masalah</h4>
-        <p id="modalProblem">Deskripsi masalah...</p>
         
-        <h4><span class="highlight">_</span> Solusi Teknis</h4>
-        <p id="modalSolution">Deskripsi solusi...</p>
-        
-        <!-- INJEKSI ARSITEKTUR & METRIK TA (Murni CSS/HTML) -->
-        <div id="taExtras" class="ta-extras">
-          <h4><span class="highlight">_</span> System Architecture Diagram</h4>
-          <div class="arch-diagram">
-            <div class="arch-block">ADXL345 & ACS712</div>
-            <div class="arch-arrow">➔</div>
-            <div class="arch-block">ESP32 (Edge)</div>
-            <div class="arch-arrow">➔</div>
-            <div class="arch-block">LSTM Classifier</div>
-            <div class="arch-arrow">➔</div>
-            <div class="arch-block">RUL (Polyfit)</div>
-          </div>
+        <!-- BLOK STANDAR -->
+        <div id="standardDetails">
+          <h4><span class="highlight">_</span> Latar Belakang Masalah</h4>
+          <p id="modalProblem">Deskripsi masalah...</p>
           
-          <h4><span class="highlight">_</span> Edge AI Performance Metrics</h4>
-          <div class="metric-bar-group">
-            <div class="metric-label"><span>Accuracy</span><span>99.99%</span></div>
-            <div class="metric-track"><div class="metric-fill" style="width: 99.99%;"></div></div>
-          </div>
-          <div class="metric-bar-group">
-            <div class="metric-label"><span>Sensitivity (Recall)</span><span>99.96%</span></div>
-            <div class="metric-track"><div class="metric-fill" style="width: 99.96%;"></div></div>
-          </div>
-          <div class="metric-bar-group">
-            <div class="metric-label"><span>F1-Score</span><span>99.92%</span></div>
-            <div class="metric-track"><div class="metric-fill" style="width: 99.92%;"></div></div>
+          <h4><span class="highlight">_</span> Solusi Teknis</h4>
+          <p id="modalSolution">Deskripsi solusi...</p>
+          
+          <!-- INJEKSI ARSITEKTUR & METRIK TA (Murni CSS/HTML) -->
+          <div id="taExtras" class="ta-extras">
+            <h4><span class="highlight">_</span> System Architecture Diagram</h4>
+            <div class="arch-diagram">
+              <div class="arch-block">ADXL345 & ACS712</div>
+              <div class="arch-arrow">➔</div>
+              <div class="arch-block">ESP32 (Edge)</div>
+              <div class="arch-arrow">➔</div>
+              <div class="arch-block">LSTM Classifier</div>
+              <div class="arch-arrow">➔</div>
+              <div class="arch-block">RUL (Polyfit)</div>
+            </div>
+            
+            <h4><span class="highlight">_</span> Edge AI Performance Metrics</h4>
+            <div class="metric-bar-group">
+              <div class="metric-label"><span>Accuracy</span><span>99.99%</span></div>
+              <div class="metric-track"><div class="metric-fill" style="width: 99.99%;"></div></div>
+            </div>
+            <div class="metric-bar-group">
+              <div class="metric-label"><span>Sensitivity (Recall)</span><span>99.96%</span></div>
+              <div class="metric-track"><div class="metric-fill" style="width: 99.96%;"></div></div>
+            </div>
+            <div class="metric-bar-group">
+              <div class="metric-label"><span>F1-Score</span><span>99.92%</span></div>
+              <div class="metric-track"><div class="metric-fill" style="width: 99.92%;"></div></div>
+            </div>
+
+            <br>
+            <h4><span class="highlight">_</span> RUL Detection Lead-Time Window</h4>
+            <div class="metric-bar-group">
+              <div class="metric-label"><span>Software Disturbance Alert</span><span>36.1 Menit</span></div>
+              <div class="metric-track"><div class="metric-fill rul-fill" style="width: 56%;"></div></div>
+            </div>
+            <div class="metric-bar-group">
+              <div class="metric-label"><span>Fluid Blockage Alert</span><span>64.0 Menit</span></div>
+              <div class="metric-track"><div class="metric-fill rul-fill" style="width: 100%;"></div></div>
+            </div>
           </div>
 
-          <br>
-          <h4><span class="highlight">_</span> RUL Detection Lead-Time Window</h4>
-          <div class="metric-bar-group">
-            <div class="metric-label"><span>Software Disturbance Alert</span><span>36.1 Menit</span></div>
-            <div class="metric-track"><div class="metric-fill rul-fill" style="width: 56%;"></div></div>
-          </div>
-          <div class="metric-bar-group">
-            <div class="metric-label"><span>Fluid Blockage Alert</span><span>64.0 Menit</span></div>
-            <div class="metric-track"><div class="metric-fill rul-fill" style="width: 100%;"></div></div>
-          </div>
+          <h4><span class="highlight">_</span> Dampak & Hasil</h4>
+          <p id="modalImpact">Deskripsi dampak...</p>
+          
+          <!-- TOMBOL LINK EKSTERNAL (REPO/PAPER) BARU -->
+          <a id="modalExtLink" href="#" target="_blank" class="btn-cert" style="display:none; margin-top:15px; font-size:12px; padding:8px 14px;">🔗 Lihat Referensi</a>
         </div>
 
-        <h4><span class="highlight">_</span> Dampak & Hasil Uji</h4>
-        <p id="modalImpact">Deskripsi dampak...</p>
+        <!-- BLOK KHUSUS PRAKTIKUM (Hanya Daftar Modul) -->
+        <div id="academicDetails" style="display: none;">
+          <h4><span class="highlight">_</span> Daftar Modul & Silabus Pembelajaran</h4>
+          <p id="modalModulText" style="line-height: 2; color: var(--muted); font-size: 0.95rem; margin-top: 10px;"></p>
+        </div>
+
       </div>
     </div>
   </div>
 </div>
 
-<!-- MENGHUBUNGKAN KE FILE JS EKSTERNAL -->
+<!-- ==========================================
+     TERMINAL EASTER EGG (NEW)
+     ========================================== -->
+<button id="termBtn" aria-label="Open Terminal">&gt;_</button>
+<div id="termOverlay" class="hidden">
+   <div class="term-header"><span>Nexus:~$</span><button onclick="closeTerm()" style="background:none; border:none; color:var(--copper-bright); cursor:pointer;">X</button></div>
+   <div id="termOutput"></div>
+   <div class="term-input-line"><span class="prompt">$</span><input type="text" id="termInput" autocomplete="off" spellcheck="false" placeholder="type 'help'"></div>
+</div>
+
+<!-- PEMANGGILAN SCRIPT -->
+<script src="js/nexus.js"></script>
 <script src="js/script.js"></script>
 
 </body>
