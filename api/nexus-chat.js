@@ -15,7 +15,7 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'llama3-8b-8192', // Model kencang & gratis dari Groq
+        model: 'llama-3.1-8b-instant', // Diubah ke model Groq yang aktif
         messages: [
           { role: 'system', content: context },
           { role: 'user', content: message }
@@ -26,6 +26,8 @@ export default async function handler(req, res) {
     });
 
     if (!groqRes.ok) {
+      const errorData = await groqRes.text(); // Membantu melihat detail error dari Groq jika gagal lagi
+      console.error('Groq API Detailed Error:', errorData);
       throw new Error(`Groq API Error: ${groqRes.status}`);
     }
 
