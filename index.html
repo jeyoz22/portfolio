@@ -55,11 +55,26 @@
   gtag('config', 'G-MJSL81T36G');
 </script>
 </head>
-<body>
+<body data-cursor="idle">
 
-<!-- CUSTOM CURSOR -->
-<div id="cursor-dot"></div>
-<div id="cursor-outline"></div>
+<!-- NEXUS ADAPTIVE CURSOR (PREMIUM MORPHING) -->
+<svg id="nexus-cursor" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+  <!-- Click Ripple -->
+  <circle id="nc-ripple" cx="15" cy="15" r="0" fill="none" stroke="var(--gold)" stroke-width="0" opacity="0"/>
+  
+  <!-- The Cross Lines -->
+  <g id="nc-cross" stroke="var(--copper-bright)" stroke-width="1.5" stroke-linecap="round">
+    <line id="nc-top" x1="15" y1="15" x2="15" y2="4" />
+    <line id="nc-bot" x1="15" y1="15" x2="15" y2="26" />
+    <line id="nc-left" x1="15" y1="15" x2="4" y2="15" />
+    <line id="nc-right" x1="15" y1="15" x2="26" y2="15" />
+    <!-- Pointer Tip (Hidden in idle state) -->
+    <polyline id="nc-tip" points="21,11 27,15 21,19" fill="none" stroke="var(--copper-bright)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0" />
+  </g>
+  
+  <!-- Center Core -->
+  <circle id="nc-center" cx="15" cy="15" r="2.5" fill="var(--gold)"/>
+</svg>
 
 <!-- SPLASH SCREEN / BOOT SEQUENCE (SKIPPABLE) -->
 <div id="splashScreen">
@@ -110,7 +125,7 @@
         <div class="stat"><div class="n">01</div><div class="l">Juara 1 FMRG</div></div>
       </div>
 
-      <!-- CREDIBILITY STRIP (Saran Reviewer: Bukti terkuat taruh di atas) -->
+      <!-- CREDIBILITY STRIP -->
       <div class="credibility-strip reveal" style="margin-top:20px; padding:12px 15px; border-left:3px solid var(--gold); background:rgba(212,175,106,0.05); font-family:'Space Mono'; font-size:11px; color:var(--silk);">
         ★ <span style="color:var(--gold);">Featured on TVRI Sulut</span> &amp; <span style="color:var(--copper-bright);">Presented Innovation to the Provincial Governor</span>
       </div>
@@ -124,7 +139,7 @@
   </div>
 </section>
 
-<!-- SECTION JOURNEY (TIMELINE) DENGAN FITUR MODAL -->
+<!-- SECTION JOURNEY (TIMELINE) -->
 <section id="journey">
   <div class="designator"><span class="pad"></span>U1 — ACADEMIC & PROFESSIONAL JOURNEY</div>
   <div class="timeline">
@@ -633,7 +648,7 @@
 
   <h3 class="sub-heading reveal" style="margin-top: 40px;">Technology Exposure (Projects Based)</h3>
   
-  <!-- SKILLS COUNTER (Menggantikan baris persentase yang tidak valid - Saran Reviewer) -->
+  <!-- SKILLS COUNTER -->
   <div class="skill-container">
     <div class="skill-row reveal" style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(212,175,106,0.2); padding-bottom:12px; margin-bottom:16px;">
       <div style="font-family:'Archivo'; font-size:1.05rem; color:var(--silk);">Python (AI, Backend, CV)</div>
@@ -816,7 +831,7 @@
    <div class="term-input-line"><span class="prompt">$</span><input type="text" id="termInput" autocomplete="off" spellcheck="false" placeholder="type 'help'"></div>
 </div>
 
-<script src="js/nexus.js"></script>
+<script type="module" src="js/nexus.js"></script>
 <script src="js/script.js"></script>
 
 </body>

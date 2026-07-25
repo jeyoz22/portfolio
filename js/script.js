@@ -1,27 +1,54 @@
 /* =========================================
-   1. CUSTOM CURSOR (Disembunyikan Otomatis di HP via CSS & JS)
+   1. NEXUS ADAPTIVE CURSOR (PREMIUM LOGIC)
    ========================================= */
-const dot = document.getElementById("cursor-dot");
-const outline = document.getElementById("cursor-outline");
+const cursor = document.getElementById("nexus-cursor");
 const isTouchDevice = (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
 
-if (!isTouchDevice) {
+if (!isTouchDevice && cursor) {
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let cursorX = mouseX;
+  let cursorY = mouseY;
+  
+  // Algoritma pergerakan halus (menggunakan requestAnimationFrame untuk menghindari stuttering)
+  function animateCursor() {
+    cursorX += (mouseX - cursorX) * 0.5; // Easing diatur ke 0.5 agar responsif dan presisi
+    cursorY += (mouseY - cursorY) * 0.5;
+    
+    // Menggunakan translate3d agar memanfaatkan akselerasi GPU
+    cursor.style.transform = `translate3d(calc(${cursorX}px - 50%), calc(${cursorY}px - 50%), 0)`;
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
   window.addEventListener("mousemove", (e) => {
-    if (dot && outline) {
-      dot.style.left = e.clientX + "px";
-      dot.style.top = e.clientY + "px";
-      outline.style.left = e.clientX + "px";
-      outline.style.top = e.clientY + "px";
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  // State Management: Hover (Links/Buttons/Cards)
+  const hoverTargets = document.querySelectorAll("a, button, .tl-item, .proj-card, .comp-row, .news-card, .filter-btn");
+  hoverTargets.forEach(el => {
+    el.addEventListener("mouseenter", () => document.body.setAttribute("data-cursor", "hover"));
+    el.addEventListener("mouseleave", () => document.body.setAttribute("data-cursor", "idle"));
+  });
+
+  // State Management: Text (I-Beam)
+  const textTargets = document.querySelectorAll("p, h1, h2, h3, h4, span, .desc, .term-input-line input");
+  textTargets.forEach(el => {
+    // Memastikan deteksi teks tidak menimpa elemen interaktif
+    if(!el.closest('a') && !el.closest('button') && !el.closest('.proj-card') && !el.closest('.tl-item')) {
+      el.addEventListener("mouseenter", () => document.body.setAttribute("data-cursor", "text"));
+      el.addEventListener("mouseleave", () => document.body.setAttribute("data-cursor", "idle"));
     }
   });
 
-  document.querySelectorAll("a, button, .tl-item, .proj-card, .comp-row, .news-card").forEach(el => {
-    el.addEventListener("mouseenter", () => document.body.classList.add("cursor-hover"));
-    el.addEventListener("mouseleave", () => document.body.classList.remove("cursor-hover"));
-  });
+  // State Management: Click Effect
+  window.addEventListener("mousedown", () => document.body.classList.add("cursor-clicking"));
+  window.addEventListener("mouseup", () => document.body.classList.remove("cursor-clicking"));
 } else {
-  if(dot) dot.style.display = 'none';
-  if(outline) outline.style.display = 'none';
+  // Matikan kursor kustom di perangkat touch
+  if(cursor) cursor.style.display = 'none';
 }
 
 /* =========================================
@@ -41,8 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
       };
       
       let splashTimer = setTimeout(hideSplash, 1500);
-      
-      // Bisa di-skip jika ditekan tombol apa saja atau diklik
       window.addEventListener('keydown', hideSplash, {once: true});
       window.addEventListener('click', hideSplash, {once: true});
     }
@@ -100,7 +125,6 @@ const revealObserver = new IntersectionObserver((entries, observer) => {
 
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-// Scrollspy Logic untuk Highlight Navigasi Aktif
 const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll(".edge-nav .pins a");
 
@@ -121,7 +145,7 @@ window.addEventListener("scroll", () => {
 });
 
 /* =========================================
-   5. 3D TILT EFFECT PADA KARTU PROYEK (HANYA DESKTOP)
+   5. 3D TILT EFFECT PADA KARTU PROYEK
    ========================================= */
 if (!isTouchDevice) {
   const tiltElements = document.querySelectorAll('.proj-card, .chip-photo');
@@ -185,8 +209,8 @@ if (termInput) {
       e.preventDefault();
       const currentVal = termInput.value.toLowerCase().trim();
       if (!currentVal) return;
-      if (typeof VALID_COMMANDS !== 'undefined') {
-        const match = VALID_COMMANDS.find(c => c.startsWith(currentVal));
+      if (typeof window.VALID_COMMANDS !== 'undefined') {
+        const match = window.VALID_COMMANDS.find(c => c.startsWith(currentVal));
         if (match) { termInput.value = match; }
       }
       return;
@@ -215,17 +239,31 @@ if (termInput) {
       termOutput.innerHTML += `<div><span style="color:var(--gold)">$</span> ${cmd}</div>`;
       termInput.value = '';
 
-      if (cmd.toLowerCase() === 'clear') { termOutput.innerHTML = ''; return; }
-
-      let res = "Error: Sistem Nexus tidak merespons.";
-      if (typeof getNexusResponse === 'function') {
-        res = getNexusResponse(cmd);
+      if (cmd.toLowerCase() === 'clear' || cmd.toLowerCase() === 'bersihkan') { 
+        termOutput.innerHTML = ''; 
+        return; 
       }
 
-      setTimeout(() => {
-        termOutput.innerHTML += `<div style="color:var(--copper-bright); margin-bottom:12px;">[Nexus]: ${res}</div>`;
-        termOutput.scrollTop = termOutput.scrollHeight;
-      }, 150);
+      // LOADING STATE SEBELUM API MERESPONS
+      const loadingId = 'loading-' + Date.now();
+      termOutput.innerHTML += `<div id="${loadingId}" style="color:var(--muted); margin-bottom:12px;">[Nexus]: Sedang menghubungkan...</div>`;
+      termOutput.scrollTop = termOutput.scrollHeight;
+
+      // PANGGIL ASYNC FUNCTION
+      if (typeof window.getNexusResponse === 'function') {
+        window.getNexusResponse(cmd).then(res => {
+          const loadingEl = document.getElementById(loadingId);
+          if (loadingEl) {
+             loadingEl.id = ''; 
+             loadingEl.style.color = 'var(--copper-bright)';
+             loadingEl.innerHTML = `[Nexus]: ${res}`;
+          }
+          termOutput.scrollTop = termOutput.scrollHeight;
+        });
+      } else {
+        const loadingEl = document.getElementById(loadingId);
+        if (loadingEl) loadingEl.innerHTML = "[Nexus]: System offline.";
+      }
     }
   });
 }
@@ -253,8 +291,6 @@ function filterProjects(tag, btn) {
 }
 
 let slideIndex = 1;
-
-// Mobile Swipe logic for Slideshow
 let touchstartX = 0;
 let touchendX = 0;
 const slideshowContainer = document.getElementById('slideshowContainer');
@@ -265,10 +301,9 @@ slideshowContainer.addEventListener('touchstart', e => {
 
 slideshowContainer.addEventListener('touchend', e => {
   touchendX = e.changedTouches[0].screenX;
-  if (touchendX < touchstartX - 40) changeSlide(1);    // Swipe Left
-  if (touchendX > touchstartX + 40) changeSlide(-1);  // Swipe Right
+  if (touchendX < touchstartX - 40) changeSlide(1); 
+  if (touchendX > touchstartX + 40) changeSlide(-1);
 }, {passive: true});
-
 
 function openModal(element) {
   const modal = document.getElementById('detailModal');
@@ -276,8 +311,6 @@ function openModal(element) {
   document.getElementById('modalCat').innerText = element.getAttribute('data-cat');
   document.getElementById('modalTitle').innerText = modalTitle;
   
-  // Analytics / Tracking (Saran Reviewer + Integrasi GA4)
-  console.log('[Analytics Tracker] Visitor opened project:', modalTitle);
   if (typeof gtag === 'function') {
     gtag('event', 'view_project', {
       'event_category': 'Portfolio',
@@ -306,7 +339,6 @@ function openModal(element) {
     document.getElementById('modalSolution').innerText = element.getAttribute('data-solution');
     document.getElementById('modalImpact').innerText = element.getAttribute('data-impact');
     
-    // INJEKSI ARSITEKTUR DINAMIS
     const pid = element.getAttribute('data-id');
     const archContainer = document.getElementById('modalArchContainer');
     const archTemplate = document.getElementById('arch-' + pid);
@@ -317,7 +349,6 @@ function openModal(element) {
         archContainer.style.display = 'none';
     }
 
-    // INJEKSI METRIK DINAMIS
     const metricsStr = element.getAttribute('data-metrics');
     const metricContainer = document.getElementById('modalMetricContainer');
     if(metricsStr) {
@@ -337,7 +368,6 @@ function openModal(element) {
         metricContainer.style.display = 'none';
     }
     
-    // INJEKSI TAUTAN (REPO, PAPER, DEMO)
     const demoLink = element.getAttribute('data-demolink');
     const paperLink = element.getAttribute('data-paperlink');
     const extLink = element.getAttribute('data-link');
@@ -350,7 +380,6 @@ function openModal(element) {
     if(paperLink) { btnPaper.href = paperLink; btnPaper.style.display = 'inline-block'; } else { btnPaper.style.display = 'none'; }
     if(extLink) { btnExt.href = extLink; btnExt.style.display = 'inline-block'; } else { btnExt.style.display = 'none'; }
     
-    // SLIDESHOW INIT
     const imgString = element.getAttribute('data-images');
     const videoUrl = element.getAttribute('data-video');
     const oldSlides = slideshowContainer.querySelectorAll('.slide');
